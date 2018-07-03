@@ -72,10 +72,10 @@ class RovioInterface {
 
   // If update_filter is false; the measurement will just be queued but the
   // actual prediction is only applied before the next update is processed.
-  virtual bool processImuUpdate(const Eigen::Vector3d &acc, const Eigen::Vector3d &gyr,
+  virtual std::shared_ptr<RovioState> processImuUpdate(const Eigen::Vector3d &acc, const Eigen::Vector3d &gyr,
                                 const double time_s, bool update_filter) = 0;
 
-  virtual bool processImageUpdate(const int camID, const cv::Mat &cv_img,
+  virtual std::shared_ptr<RovioState> processImageUpdate(const int camID, const cv::Mat &cv_img,
                                   const double time_s) = 0;
 
   // 6DoF pose-based localization.
