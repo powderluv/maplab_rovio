@@ -106,10 +106,10 @@ public:
 
   bool processVelocityUpdate(const Eigen::Vector3d &AvM, const double time_s);
 
-  bool processImuUpdate(const Eigen::Vector3d &acc, const Eigen::Vector3d &gyr,
+  std::shared_ptr<RovioState> processImuUpdate(const Eigen::Vector3d &acc, const Eigen::Vector3d &gyr,
                         const double time_s, bool update_filter);
 
-  bool processImageUpdate(const int camID, const cv::Mat &cv_img,
+  std::shared_ptr<RovioState> processImageUpdate(const int camID, const cv::Mat &cv_img,
                           const double time_s);
 
   bool processGroundTruthUpdate(const Eigen::Vector3d &JrJV, const QPD &qJV,
@@ -143,7 +143,7 @@ public:
 private:
   /** \brief Trigger a filter update. Will return true if an update happened.
   */
-  bool updateFilter();
+  std::shared_ptr<RovioState> updateFilter();
 
   void notifyAllStateUpdateCallbacks(const RovioState& state) const;
 
